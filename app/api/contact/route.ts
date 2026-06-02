@@ -75,18 +75,16 @@ export async function POST(req: Request) {
           box-shadow:0 10px 40px rgba(0,0,0,.08);
         ">
 
-          <div style="
-            background:linear-gradient(135deg,#0f172a,#1e40af);
-            padding:35px;
-            text-align:center;
-          ">
-            <img
-              src="${LOGO_URL}"
-              alt="BMRB Research"
-              width="220"
-              style="max-width:220px;"
-            />
-          </div>
+          <div style="background:linear-gradient(135deg,#0f172a,#1e40af); padding:35px; text-align:center;">
+  <img 
+    src="${LOGO_URL}" 
+    alt="BMRB Research" 
+    width="220" 
+    height="auto"
+    style="max-width:220px; width:100%; height:auto; display:block;"
+    border="0"
+  />
+</div>
 
           <div style="padding:35px;">
 
@@ -241,18 +239,16 @@ export async function POST(req: Request) {
           box-shadow:0 10px 40px rgba(0,0,0,.08);
         ">
 
-          <div style="
-            background:linear-gradient(135deg,#0f172a,#1e40af);
-            text-align:center;
-            padding:55px 30px;
-          ">
-            <img
-              src="${LOGO_URL}"
-              alt="BMRB Research"
-              width="220"
-              style="max-width:220px;"
-            />
-          </div>
+          <div style="background:linear-gradient(135deg,#0f172a,#1e40af); padding:35px; text-align:center;">
+  <img 
+    src="${LOGO_URL}" 
+    alt="BMRB Research" 
+    width="220" 
+    height="auto"
+    style="max-width:220px; width:100%; height:auto; display:block;"
+    border="0"
+  />
+</div>
 
           <div style="padding:45px;">
 
