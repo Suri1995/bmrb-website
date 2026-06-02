@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden min-h-screen flex items-center">
+    <section className="relative overflow-hidden h-[500px] md:min-h-screen flex items-center">
 
 
 
@@ -49,8 +49,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
 
           {/* Hero Content */}
           <div className="max-w-5xl flex flex-col mt-10 md:mt-20">
@@ -75,8 +74,6 @@ export default function Hero() {
               </Link>
             </div>
           </div>
-
-        </div>
       </div>
     </section>
   );

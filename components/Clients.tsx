@@ -74,9 +74,9 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className="py-16 bg-white overflow-hidden">
+    <section className="py-16 max-w-7xl mx-auto px-4 overflow-hidden">
       {/* Heading */}
-      <div className="text-center max-w-7xl mx-auto px-4">
+      <div className="text-center ">
         <img src="/icon_1.webp" alt="Title Icon" className="mx-auto mb-4 w-12" />
 
         <h6 className="text-sm font-semibold tracking-[3px] text-indigo-700 uppercase mb-3">
@@ -90,7 +90,7 @@ export default function TestimonialsSection() {
       </div>
 
       {/* Carousel */}
-      <div className="max-w-7xl mx-auto mt-8 px-4 overflow-hidden">
+      <div className="mt-8 overflow-hidden">
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{
@@ -134,14 +134,14 @@ export default function TestimonialsSection() {
       <div className="flex justify-center gap-3 max-w-6xl mx-auto px-4 mt-8">
         <button
           onClick={prevSlide}
-          className="bg-accent text-white shadow-md p-3 rounded-full hover:bg-white hover:text-blue-600 transition"
+          className="bg-accent text-white shadow-md p-3 rounded-full hover:bg-white hover:text-blue-600 transition hover:cursor-pointer"
         >
           <ChevronLeft size={20} />
         </button>
 
         <button
           onClick={nextSlide}
-          className="bg-accent text-white shadow-md p-3 rounded-full hover:bg-white hover:text-blue-600 transition"
+          className="bg-accent text-white shadow-md p-3 rounded-full hover:bg-white hover:text-blue-600 transition hover:cursor-pointer"
         >
           <ChevronRight size={20} />
         </button>
@@ -151,7 +151,7 @@ export default function TestimonialsSection() {
           alt="Background"
           width={800}
           height={100}
-          className="w-[320px] sm:w-[560px] md:w-[640px] lg:w-[960px] object-cover pointer-events-none md:mx-auto mt-10 md:mt-10"
+          className=" object-cover pointer-events-none md:mx-auto mt-10 md:mt-10"
         />
       </div>
     </section>

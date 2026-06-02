@@ -37,12 +37,12 @@ export default function team() {
         </div>
       </div>
       <Image
-        src="/logo-image.webp"
-        alt="Background"
-        width={800}
-        height={100}
-        className="w-[320px] sm:w-[560px] md:w-[640px] lg:w-[960px] object-cover pointer-events-none md:mx-auto mt-10 md:mt-10"
-      />
+                src="/logo-image.webp"
+                alt="Background"
+                width={800}
+                height={100}
+                className=" object-cover pointer-events-none md:mx-auto mt-10 md:mt-10 px-3.5"
+              />
     </section>
   );
 }

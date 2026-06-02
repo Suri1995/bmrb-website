@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 
 export default function Thirdbanner() {
   return (
-    <section className="relative overflow-hidden min-h-screen flex items-center">
+    <section className="relative overflow-hidden h-[500px] md:min-h-screen flex items-center">
 
       {/* Background Image */}
       <div

@@ -21,7 +21,6 @@ export default function Header() {
 
   const navLinks = [
     { label: "Home", href: "/" },
-
     {
       label: "About Us",
       href: "/about/about-company",
@@ -36,7 +35,6 @@ export default function Header() {
         },
       ],
     },
-
     {
       label: "Services",
       href: "/services/brand-product-research",
@@ -67,7 +65,6 @@ export default function Header() {
         },
       ],
     },
-
     {
       label: "Clients",
       href: "/clients",
@@ -78,99 +75,131 @@ export default function Header() {
         },
       ],
     },
-
     {
       label: "Contact Us",
       href: "/contact",
     },
   ];
 
+  // Handle mobile tap: only open dropdown for items that have one, otherwise navigate
+  const handleMobileItemClick = (link: typeof navLinks[0]) => {
+    if (link.dropdown) {
+      // Toggle dropdown for items that have submenu
+      setOpenDropdown(openDropdown === link.label ? null : link.label);
+    } else {
+      // Navigate away and close menu for items without dropdown (Home & Contact Us)
+      window.location.href = link.href;
+      setIsOpen(false);
+    }
+  };
+
   return (
-    <header className="fixed w-full z-50">
-      <div className="bg-gray-200 shadow-2xl">
+    <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'shadow-md' : ''}`}>
+      <div className={`transition-colors duration-300 ${isScrolled ? 'bg-white/90 backdrop-blur-md border-b border-gray-100' : 'bg-white shadow-sm'}`}>
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 font-bold text-xl text-primary"
+            className="flex items-center gap-2 font-bold text-xl text-primary focus:outline-none focus:ring-2 focus:ring-secondary rounded-lg"
+            aria-label="Home"
           >
             <Image
               src="/logo-image.webp"
-              alt="Logo"
+              alt="BMRB Logo"
               width={180}
               height={50}
-              className="w-[180px] h-[50px]"
+              className="w-[180px] h-[50px] object-contain"
+              priority
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-2">
+          <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
               <div key={link.label} className="relative group">
                 {link.dropdown ? (
                   <button
                     type="button"
-                    className="text-md font-semibold text-secondary hover:text-secondary transition-colors px-3 py-2 rounded-lg flex items-center gap-1 hover:bg-muted"
+                    className="text-md font-medium text-gray-700 hover:text-secondary transition-colors px-3 py-2 rounded-lg flex items-center gap-1 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-secondary/20"
+                    aria-expanded="false"
                   >
                     {link.label}
-                    <ChevronDown size={16} />
+                    <ChevronDown size={16} className="transition-transform duration-200 group-hover:rotate-180" />
                   </button>
                 ) : (
                   <Link
                     href={link.href}
-                    className="text-md font-semibold text-secondary hover:text-secondary transition-colors px-3 py-2 rounded-lg flex items-center gap-1 hover:bg-muted"
+                    className="text-md font-medium text-gray-700 hover:text-secondary transition-colors px-3 py-2 rounded-lg flex items-center gap-1 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-secondary/20"
                   >
                     {link.label}
                   </Link>
                 )}
 
                 {link.dropdown && (
-                  <div className="absolute left-0 mt-0 min-w-[250px] bg-white border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-40">
-                    {link.dropdown.map((item) => (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        className="block px-4 py-3 text-sm text-foreground hover:bg-secondary hover:text-white transition-colors first:rounded-t-lg last:rounded-b-lg"
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
+                  <div className="absolute left-0 mt-1 min-w-[260px] bg-white rounded-xl shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-40 overflow-hidden">
+                    <div className="py-2">
+                      {link.dropdown.map((item) => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-secondary hover:text-white transition-colors"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
             ))}
           </div>
 
-          {/* CTA Button */}
+          {/* Desktop CTA Button */}
           <Link
             href="/contact"
-            className="hidden lg:inline-block px-6 py-2 bg-secondary text-white rounded-lg text-sm font-medium hover:bg-opacity-90 transition-all"
+            className="hidden lg:inline-block px-6 py-2.5 bg-secondary text-white rounded-full text-sm font-semibold hover:bg-secondary/90 transition-all shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-secondary/50"
           >
             Get Started
           </Link>
 
           {/* Mobile Menu Button */}
-          <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden p-2">
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          <button 
+            onClick={() => setIsOpen(!isOpen)} 
+            className="lg:hidden p-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-secondary/50"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
+          >
+            {isOpen ? <X size={22} className="text-gray-700" /> : <Menu size={22} className="text-gray-700" />}
           </button>
         </nav>
       </div>
 
-      {/* MOBILE MENU */}
+      {/* MOBILE MENU - Enhanced UI/UX */}
       {isOpen && (
-        <div className="absolute left-0 top-full w-full border-b border-border bg-orange-50 shadow-xl lg:hidden">
-          <div className="space-y-2 px-4 py-5">
+        <div className="lg:hidden absolute left-0 top-full w-full bg-white shadow-xl border-t border-gray-100 animate-in slide-in-from-top-5 duration-200 h-[100vh] overflow-y-auto">
+          <div className="px-4 py-6 space-y-1">
             {navLinks.map((link) => (
-              <div key={link.label}>
-                {/* MOBILE ITEM */}
-                <div className="flex items-center justify-between rounded-xl px-3 py-3 hover:bg-muted">
-                  <Link
-                    href={link.href}
-                    className="flex-1 text-sm font-semibold text-foreground"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
+              <div key={link.label} className="border-b border-gray-50 last:border-0">
+                {/* Mobile Main Item */}
+                <div className="flex items-center justify-between rounded-xl py-3 px-2 hover:bg-gray-50 transition-colors">
+                  {link.dropdown ? (
+                    // Dropdown items (About Us, Services, Clients) - tap to open dropdown
+                    <button
+                      onClick={() => handleMobileItemClick(link)}
+                      className="flex-1 text-left text-base font-semibold text-gray-800 focus:outline-none"
+                    >
+                      {link.label}
+                    </button>
+                  ) : (
+                    // Non-dropdown items (Home, Contact Us) - normal navigation
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className="flex-1 text-left text-base font-semibold text-gray-800"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
 
                   {link.dropdown && (
                     <button
@@ -179,10 +208,12 @@ export default function Header() {
                           openDropdown === link.label ? null : link.label,
                         )
                       }
+                      className="p-1 rounded-md hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-secondary/50"
+                      aria-label={`Toggle ${link.label} submenu`}
                     >
                       <ChevronDown
                         size={18}
-                        className={`transition-transform duration-300 ${
+                        className={`transition-transform duration-300 text-gray-500 ${
                           openDropdown === link.label ? "rotate-180" : ""
                         }`}
                       />
@@ -190,13 +221,9 @@ export default function Header() {
                   )}
                 </div>
 
-                {/* MOBILE DROPDOWN */}
+                {/* Mobile Dropdown with smooth animation */}
                 {link.dropdown && openDropdown === link.label && (
-                  <div
-                    className={`mt-2 space-y-2 pl-4 overflow-y-auto ${
-                      link.label === "Services" ? "max-h-60 pr-2" : ""
-                    }`}
-                  >
+                  <div className="ml-4 mb-2 space-y-1 overflow-hidden animate-in slide-in-from-top-2 duration-200">
                     {link.dropdown.map((item) => (
                       <Link
                         key={item.label}
@@ -205,7 +232,7 @@ export default function Header() {
                           setIsOpen(false);
                           setOpenDropdown(null);
                         }}
-                        className="block rounded-lg px-4 py-3 text-sm text-foreground transition-colors hover:bg-secondary hover:text-white"
+                        className="block rounded-lg px-4 py-2.5 text-sm text-gray-600 hover:bg-secondary hover:text-white transition-colors"
                       >
                         {item.label}
                       </Link>
@@ -214,7 +241,6 @@ export default function Header() {
                 )}
               </div>
             ))}
-
           </div>
         </div>
       )}

@@ -3,8 +3,8 @@ import Link from 'next/link'
 
 export default function  Getintouch() {
   return (
-    <section className="relative z-20 px-4 md:px-4">
-      <div className="h-fit max-w-7xl translate-y-1/2 bg-[#490eea] px-6 py-6 shadow-2xl md:px-14 md:py-14">
+    <section className="relative z-20 h-fit max-w-7xl mx-auto px-4">
+      <div className=" translate-y-1/2 bg-[#490eea] px-6 py-6 shadow-2xl md:px-14 md:py-14">
         
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           

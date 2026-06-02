@@ -23,7 +23,7 @@ const testimonials = [
 
 export default function Experience() {
   return (
-    <section className="py-16 bg-white overflow-hidden">
+    <section className="py-16 px-3.5 bg-white overflow-hidden">
       {/* Heading */}
       <div className="text-center max-w-4xl mx-auto px-4">
         <img src="/icon_1.webp" alt="Title Icon" className="mx-auto mb-4 w-12" />
@@ -75,11 +75,12 @@ export default function Experience() {
 
       {/* Bottom Image */}
       <Image
-        src="/logo-image.webp"
-        alt="Background"
-        width={800}
-        height={100}
-        className="w-[320px] sm:w-[560px] md:w-[640px] lg:w-[960px] object-cover pointer-events-none md:mx-auto mt-10 md:mt-10"      />
+                src="/logo-image.webp"
+                alt="Background"
+                width={800}
+                height={100}
+                className=" object-cover pointer-events-none md:mx-auto mt-10 md:mt-10"
+              />
     </section>
   );
 }
