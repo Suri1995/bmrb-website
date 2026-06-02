@@ -10,7 +10,7 @@ export default function Hero() {
 
       {/* Background Image */}
       <div
-        className="absolute max-w-7xl inset-0 bg-cover bg-center"
+        className="absolute w-full inset-0 bg-cover bg-center"
         style={{
           backgroundImage: "url('/home-bg.webp')",
         }}
