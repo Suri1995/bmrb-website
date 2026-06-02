@@ -22,7 +22,7 @@ const WEBSITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 const LOGO_URL = `${WEBSITE_URL}/logo-image.webp`;
 
 export async function POST(req: Request) {
-     console.log("CONTACT API HIT");
+  console.log("CONTACT API HIT");
   try {
     const {
       name,
@@ -49,13 +49,14 @@ export async function POST(req: Request) {
     // LEAD EMAIL TO DIRECTOR
     // ==========================================
 
-    const directorMail = await resend.emails.send({
-  from: `${COMPANY_NAME} <${FROM_EMAIL}>`,
-  to: [COMPANY_EMAIL],
-  replyTo: email,
-  subject: `🔔 New Website Inquiry | ${subject}`,
+    try {
+      const directorMail = await resend.emails.send({
+        from: `${COMPANY_NAME} <${FROM_EMAIL}>`,
+        to: [COMPANY_EMAIL],
+        replyTo: email,
+        subject: `🔔 New Website Inquiry | ${subject}`,
 
-      html: `
+        html: `
       <!DOCTYPE html>
       <html>
       <body style="
@@ -196,35 +197,32 @@ export async function POST(req: Request) {
       </body>
       </html>
       `,
-    });
-console.log("Director Email Response:", directorMail);
+      });
+      
+      console.log("Director Email Response:", directorMail);
 
-if (directorMail.error) {
-  console.error("Director Email Error:", directorMail.error);
-
-  return NextResponse.json(
-    {
-      success: false,
-      message: "Failed to send notification email",
-    },
-    {
-      status: 500,
+      if (directorMail.error) {
+        console.error("Director Email Error:", directorMail.error);
+        // Continue to send customer email even if director email fails
+        console.warn("Continuing to send customer email despite director email failure");
+      }
+    } catch (directorError) {
+      console.error("Director email sending failed:", directorError);
+      // Continue to send customer email
     }
-  );
-}
-
 
     // ==========================================
     // THANK YOU EMAIL TO CUSTOMER
     // ==========================================
 
-    const customerMail = await resend.emails.send({
-  from: `${COMPANY_NAME} <${FROM_EMAIL}>`,
-  to: [email],
-  replyTo: COMPANY_EMAIL,
-  subject: "Thank You for Contacting BMRB Research",
+    try {
+      const customerMail = await resend.emails.send({
+        from: `${COMPANY_NAME} <${FROM_EMAIL}>`,
+        to: [email],
+        replyTo: COMPANY_EMAIL,
+        subject: "Thank You for Contacting BMRB Research",
 
-      html: `
+        html: `
       <!DOCTYPE html>
       <html>
       <body style="
@@ -388,42 +386,55 @@ if (directorMail.error) {
       </body>
       </html>
       `,
-    });
+      });
 
-    console.log("Customer Email Response:");
-console.dir(customerMail, { depth: null });
+      console.log("Customer Email Response:");
+      console.dir(customerMail, { depth: null });
 
-if (customerMail.error) {
-  console.error("Customer Email Error:");
-  console.dir(customerMail.error, { depth: null });
-
-  return NextResponse.json(
-    {
-      success: false,
-      message: JSON.stringify(customerMail.error),
-    },
-    {
-      status: 500,
+      if (customerMail.error) {
+        console.error("Customer Email Error:");
+        console.dir(customerMail.error, { depth: null });
+        
+        // Still return success if only customer email fails? No, customer email is important
+        return NextResponse.json(
+          {
+            success: false,
+            message: "Failed to send confirmation email. Please try again later.",
+          },
+          {
+            status: 500,
+          }
+        );
+      }
+    } catch (customerError) {
+      console.error("Customer email sending failed:", customerError);
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Failed to send confirmation email. Please try again later.",
+        },
+        {
+          status: 500,
+        }
+      );
     }
-  );
-}
 
     return NextResponse.json({
       success: true,
       message: "Message sent successfully",
     });
   } catch (error: any) {
-  console.error("CONTACT FORM ERROR:");
-  console.error(error);
+    console.error("CONTACT FORM ERROR:");
+    console.error(error);
 
-  return NextResponse.json(
-    {
-      success: false,
-      message: error?.message || "Failed to send message",
-    },
-    {
-      status: 500,
-    }
-  );
-}
+    return NextResponse.json(
+      {
+        success: false,
+        message: error?.message || "Failed to send message",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
 }
