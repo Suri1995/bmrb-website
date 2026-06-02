@@ -10,7 +10,7 @@ export default function Fourthbanner() {
 
       {/* Background Image */}
       <div
-        className="absolute max-w-7xl inset-0 bg-cover bg-center"
+        className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage: "url('/home-pg-1.webp')",
         }}
@@ -47,8 +47,8 @@ export default function Fourthbanner() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="">
 
           {/* Hero Content */}
           <div className="max-w-5xl flex flex-col mt-30">

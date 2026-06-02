@@ -47,11 +47,10 @@ export default function Thirdbanner() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full px-4 md:px-8">
-        <div className="max-w-7xl mx-auto">
+      <div className="relative z-10  max-w-7xl mx-auto px-4 md:px-8">
 
           {/* Hero Content */}
-          <div className="max-w-5xl flex flex-col mt-10">
+          <div className="flex flex-col mt-10">
 
             <p className="text-sm md:text-lg text-white mb-8 leading-relaxed tracking-wide">
                 Building stronger brands and successful products through in-depth consumer insights.
@@ -61,7 +60,6 @@ export default function Thirdbanner() {
                 BRAND & PRODUCT RESEARCH
             </h1>
           </div>
-        </div>
       </div>
     </section>
   );

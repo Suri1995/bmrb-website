@@ -5,7 +5,8 @@ import Link from 'next/link';
 export default function Partner() {
   return (
     <section >
-        <div className='w-full bg-gradient-to-r from-indigo-600/30 to-indigo-600/40 mx-auto flex flex-col items-start gap-5 px-8 py-20'>
+        <div className='w-full bg-gradient-to-r from-indigo-600/30 to-indigo-600/40 '>
+        <div className='max-w-7xl mx-auto flex flex-col items-start gap-5 px-8 py-20'>
         <p className='text-sm font-sans-serif text-white font-bold leading-tight text-center mb-2'>Partner With Our Experts</p>
         <h1 className='text-3xl md:text-7xl text-white font-bold leading-tight mb-8'>Driving Insights for Global Leaders like Hyundai Motors</h1>
         <Link 
@@ -14,6 +15,7 @@ export default function Partner() {
           >
             DISCUSS YOUR PROJECT
           </Link>
+        </div>
         </div>
     </section>
   )

@@ -47,8 +47,8 @@ export default function Fifthbanner() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="">
 
           {/* Hero Content */}
           <div className="max-w-5xl flex flex-col mt-30">
