@@ -1,0 +1,163 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                       BMRB WEBSITE COMPLETE STRUCTURE                        ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ NAVIGATION HEADER (components/Header.tsx)                                   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   BMRB  │  Home  │  About Us ▼  │  Services ▼  │  Clients ▼  │  Contact   │
+│                     ├─ About Company                                         │
+│                     └─ Our Team                                              │
+│                              ├─ Brand & Product Research                     │
+│                              ├─ Customer Satisfaction Research               │
+│                              ├─ B2B & Industrial Research                    │
+│                              ├─ Election Surveys & Opinion Polls             │
+│                              ├─ Government Project Evaluation                │
+│                              └─ Market Assessment Studies                    │
+│                                  ├─ Our Projects                             │
+│                                  └─ Our Clients                              │
+│                                                                    Get Started│
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ PAGE ROUTES                                                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│ ● HOME PAGE (/)                                                             │
+│   ├─ Hero Section                                                           │
+│   ├─ Services Overview (6 cards)                                            │
+│   ├─ Testimonials                                                           │
+│   └─ CTA Section                                                            │
+│                                                                              │
+│ ● ABOUT US PAGE (/about)                                                    │
+│   ├─ Tab: About Company (/about?tab=company)                                │
+│   │   ├─ Mission & Vision                                                   │
+│   │   ├─ Statistics Cards (25+, 500+, 100+)                                 │
+│   │   └─ Why Choose BMRB                                                    │
+│   │                                                                          │
+│   └─ Tab: Our Team (/about?tab=team)                                        │
+│       ├─ 6 Team Member Profiles                                             │
+│       └─ Company Culture Values                                             │
+│                                                                              │
+│ ● SERVICES PAGE (/services)                                                 │
+│   ├─ Brand & Product Research (/services?service=brand-research)            │
+│   ├─ Customer Satisfaction (/services?service=customer-satisfaction)        │
+│   ├─ B2B & Industrial (/services?service=b2b-research)                      │
+│   ├─ Election Surveys (/services?service=election-surveys)                  │
+│   ├─ Government Evaluation (/services?service=government-evaluation)        │
+│   └─ Market Assessment (/services?service=market-assessment)                │
+│       Each with:                                                             │
+│       - Service icon & title                                                │
+│       - Detailed description                                                │
+│       - Features & deliverables                                             │
+│       - Call to action                                                      │
+│                                                                              │
+│ ● CLIENTS PAGE (/clients)                                                   │
+│   ├─ Tab: Our Projects (/clients?tab=projects)                              │
+│   │   └─ 6 Featured Projects with Details                                   │
+│   │       ├─ Project name                                                   │
+│   │       ├─ Client name                                                    │
+│   │       ├─ Sector                                                         │
+│   │       ├─ Description & Impact                                           │
+│   │       └─ Year completed                                                 │
+│   │                                                                          │
+│   └─ Tab: Our Clients (/clients?tab=clients)                                │
+│       └─ 12 Trusted Clients Grid                                            │
+│           ├─ Company name                                                   │
+│           ├─ Logo/Emoji                                                     │
+│           └─ Industry category                                              │
+│                                                                              │
+│ ● CONTACT PAGE (/contact)                                                   │
+│   ├─ Contact Information Cards                                              │
+│   │   ├─ Phone                                                              │
+│   │   ├─ Email                                                              │
+│   │   └─ Address                                                            │
+│   ├─ Contact Form                                                           │
+│   │   ├─ Name (required)                                                    │
+│   │   ├─ Email (required)                                                   │
+│   │   ├─ Phone                                                              │
+│   │   ├─ Company                                                            │
+│   │   ├─ Subject (required)                                                 │
+│   │   └─ Message (required)                                                 │
+│   ├─ FAQ Section                                                            │
+│   └─ Response Time Info                                                     │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ COMPONENT HIERARCHY                                                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│ Layout (app/layout.tsx)                                                     │
+│   ├─ Header (components/Header.tsx) ← NAVIGATION WITH DROPDOWNS             │
+│   │   └─ Logo & Navigation Links                                            │
+│   │       ├─ About Us Dropdown                                              │
+│   │       ├─ Services Dropdown                                              │
+│   │       ├─ Clients Dropdown                                               │
+│   │       └─ Contact Button                                                 │
+│   │                                                                          │
+│   ├─ [Page Content]                                                         │
+│   │   ├─ PageHeader (components/PageHeader.tsx) ← ON ALL PAGES              │
+│   │   │   ├─ Title                                                          │
+│   │   │   ├─ Description                                                    │
+│   │   │   └─ Breadcrumbs                                                    │
+│   │   │                                                                      │
+│   │   └─ Page-Specific Content                                              │
+│   │                                                                          │
+│   └─ Footer (components/Footer.tsx)                                         │
+│       ├─ Company Info                                                       │
+│       ├─ Quick Links                                                        │
+│       └─ Contact Info                                                       │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ FEATURES AT A GLANCE                                                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│ ✅ 5 Full Pages              ✅ 2 Dropdown Types                            │
+│ ✅ 6 Services Listed         ✅ URL Query State                             │
+│ ✅ 6 Team Members            ✅ Mobile Responsive                           │
+│ ✅ 6 Projects Featured        ✅ Contact Form                               │
+│ ✅ 12 Clients Listed         ✅ Smooth Navigation                           │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ TESTING CHECKLIST                                                           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│ DESKTOP                                                                     │
+│ [ ] Hover over About Us → See 2 dropdown options                            │
+│ [ ] Hover over Services → See 6 service options                             │
+│ [ ] Hover over Clients → See 2 dropdown options                             │
+│ [ ] Click any option → Navigate to correct page/tab                         │
+│ [ ] Check URL changes → Verify query parameters                             │
+│ [ ] Refresh page → Tab state persists                                       │
+│                                                                              │
+│ MOBILE                                                                      │
+│ [ ] Tap menu icon (☰) → Mobile menu opens                                   │
+│ [ ] Tap menu items → Dropdowns expand                                       │
+│ [ ] Tap specific option → Navigate correctly                                │
+│ [ ] Menu closes after selection                                             │
+│                                                                              │
+│ FUNCTIONALITY                                                               │
+│ [ ] All links work                                                          │
+│ [ ] Form validates inputs                                                   │
+│ [ ] Contact form submits                                                    │
+│ [ ] No console errors                                                       │
+│ [ ] Page loads quickly                                                      │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+QUICK URLS FOR TESTING:
+  Home:          http://localhost:3000/
+  About Company: http://localhost:3000/about?tab=company
+  About Team:    http://localhost:3000/about?tab=team
+  Services:      http://localhost:3000/services?service=brand-research
+  Projects:      http://localhost:3000/clients?tab=projects
+  Clients:       http://localhost:3000/clients?tab=clients
+  Contact:       http://localhost:3000/contact
+
