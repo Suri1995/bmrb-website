@@ -1,15 +1,28 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
+if (!process.env.RESEND_API_KEY) {
+  throw new Error("RESEND_API_KEY is missing");
+}
+
+if (!process.env.FROM_EMAIL) {
+  throw new Error("FROM_EMAIL is missing");
+}
+
+if (!process.env.DIRECTOR_EMAIL) {
+  throw new Error("DIRECTOR_EMAIL is missing");
+}
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const COMPANY_NAME = "BMRB Research";
 const COMPANY_EMAIL = process.env.DIRECTOR_EMAIL!;
 const FROM_EMAIL = process.env.FROM_EMAIL!;
-const WEBSITE_URL = process.env.NEXT_PUBLIC_SITE_URL!;
+const WEBSITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 const LOGO_URL = `${WEBSITE_URL}/logo-image.webp`;
 
 export async function POST(req: Request) {
+     console.log("CONTACT API HIT");
   try {
     const {
       name,
@@ -36,11 +49,11 @@ export async function POST(req: Request) {
     // LEAD EMAIL TO DIRECTOR
     // ==========================================
 
-    await resend.emails.send({
-      from: `${COMPANY_NAME} <${FROM_EMAIL}>`,
-      to: [COMPANY_EMAIL],
-      replyTo: email,
-      subject: `🔔 New Website Inquiry | ${subject}`,
+    const directorMail = await resend.emails.send({
+  from: `${COMPANY_NAME} <${FROM_EMAIL}>`,
+  to: [COMPANY_EMAIL],
+  replyTo: email,
+  subject: `🔔 New Website Inquiry | ${subject}`,
 
       html: `
       <!DOCTYPE html>
@@ -184,16 +197,32 @@ export async function POST(req: Request) {
       </html>
       `,
     });
+console.log("Director Email Response:", directorMail);
+
+if (directorMail.error) {
+  console.error("Director Email Error:", directorMail.error);
+
+  return NextResponse.json(
+    {
+      success: false,
+      message: "Failed to send notification email",
+    },
+    {
+      status: 500,
+    }
+  );
+}
+
 
     // ==========================================
     // THANK YOU EMAIL TO CUSTOMER
     // ==========================================
 
-    await resend.emails.send({
-      from: `${COMPANY_NAME} <${FROM_EMAIL}>`,
-      to: [email],
-      replyTo: COMPANY_EMAIL,
-      subject: "Thank You for Contacting BMRB Research",
+    const customerMail = await resend.emails.send({
+  from: `${COMPANY_NAME} <${FROM_EMAIL}>`,
+  to: [email],
+  replyTo: COMPANY_EMAIL,
+  subject: "Thank You for Contacting BMRB Research",
 
       html: `
       <!DOCTYPE html>
@@ -361,21 +390,40 @@ export async function POST(req: Request) {
       `,
     });
 
+    console.log("Customer Email Response:");
+console.dir(customerMail, { depth: null });
+
+if (customerMail.error) {
+  console.error("Customer Email Error:");
+  console.dir(customerMail.error, { depth: null });
+
+  return NextResponse.json(
+    {
+      success: false,
+      message: JSON.stringify(customerMail.error),
+    },
+    {
+      status: 500,
+    }
+  );
+}
+
     return NextResponse.json({
       success: true,
       message: "Message sent successfully",
     });
-  } catch (error) {
-    console.error("CONTACT FORM ERROR:", error);
+  } catch (error: any) {
+  console.error("CONTACT FORM ERROR:");
+  console.error(error);
 
-    return NextResponse.json(
-      {
-        success: false,
-        message: "Failed to send message",
-      },
-      {
-        status: 500,
-      }
-    );
-  }
+  return NextResponse.json(
+    {
+      success: false,
+      message: error?.message || "Failed to send message",
+    },
+    {
+      status: 500,
+    }
+  );
+}
 }

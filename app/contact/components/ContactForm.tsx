@@ -1,3 +1,4 @@
+"use client"
 import { useState } from "react";
 import { Send } from "lucide-react";
 import { Field, inputCls } from "./Field";
@@ -51,14 +52,37 @@ export function ContactForm() {
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const v = validate();
-    if (Object.keys(v).length) {
-      setErrors(v);
-      return;
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  const v = validate();
+
+  if (Object.keys(v).length) {
+    setErrors(v);
+    return;
+  }
+
+  try {
+    console.log("Submitting form...", formData);
+
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+
+    console.log("API Response:", data);
+
+    if (!response.ok) {
+      throw new Error(data.message || "Failed to send message");
     }
+
     setSubmitted(true);
+
     setFormData({
       name: "",
       email: "",
@@ -67,7 +91,16 @@ export function ContactForm() {
       subject: "",
       message: "",
     });
-  };
+  } catch (error) {
+    console.error("FORM SUBMIT ERROR:", error);
+
+    alert(
+      error instanceof Error
+        ? error.message
+        : "Something went wrong while sending the message."
+    );
+  }
+};
 
   if (submitted) {
     return <SuccessMessage />;
