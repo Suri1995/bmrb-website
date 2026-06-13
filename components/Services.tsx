@@ -61,6 +61,7 @@ export default function ServicesSection() {
               alt="Service Icon"
               width={60}
               height={60}
+              className="w-[60px] h-auto"
             />
           </div>
         </div>

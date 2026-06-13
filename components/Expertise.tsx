@@ -4,10 +4,6 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import icon1 from "@/public/icon1.webp";
-import icon2 from "@/public/icon2.webp";
-import icon3 from "@/public/icon3.webp";
-
 export default function Expertise() {
   const [offsetY, setOffsetY] = useState(0);
 
@@ -58,23 +54,23 @@ export default function Expertise() {
           {/* ICONS */}
           <div className="flex md:items-start md:justify-start items-center justify-center gap-12 mt-10 mb-10">
               <Image
-                src={icon1}
+                src="/icon1.webp"
                 alt="icon-1"
                 width={60}
                 height={60}
-                className="w-[60px] h-auto"
+                className="w-[70px] h-auto"
               />
 
             <Image
-                src={icon2}
+                src="/icon2.webp"
                 alt="icon-2"
                 width={60}
                 height={60}
-                className="w-[60px] h-auto"
+                className="w-[70px] h-auto"
               />
               
               <Image
-                src={icon3}
+                src="/icon3.webp"
                 alt="icon-3"
                 width={60}
                 height={60}
